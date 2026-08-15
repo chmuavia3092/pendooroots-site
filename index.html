@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEMOO Washer by PENDOOROOTS — Make Every Dish Shine</title>
+    <meta name="description" content="LEMOO Washer by PENDOOROOTS — Premium natural dish wash. Grease lifter, skin friendly, perfect shine. 100% botanical ingredients.">
+    <meta name="keywords" content="LEMOO washer, dish wash, natural cleaning, lemon dish wash, grease lifter, PENDOOROOTS, premium dish wash">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+    <meta name="theme-color" content="#004b1c" id="themeColorMeta">
+</head>
+<body>
+    <a class="skip-link" href="#app">Skip to main content</a>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo">PENDOOROOTS</div>
+            <div class="preloader-bar"><div class="preloader-fill"></div></div>
+            <div class="preloader-text">Nature Perfected</div>
+        </div>
+    </div>
+
+    <!-- CURSOR -->
+    <div id="cursor" class="custom-cursor"></div>
+    <div id="cursor-follower" class="custom-cursor-follower"></div>
+
+    <!-- NAVIGATION -->
+    <header id="navbar" class="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo" data-page="home">
+                <span class="logo-mark">P</span>
+                <span class="logo-text" id="navBrand">PENDOOROOTS</span>
+            </a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#" data-page="home" class="nav-link active">Home</a>
+                <a href="#" data-page="products" class="nav-link">Shop</a>
+                <a href="#" data-page="about" class="nav-link">About</a>
+                <a href="#" data-page="sustainability" class="nav-link">Sustainability</a>
+                <a href="#" data-page="blog" class="nav-link">Journal</a>
+                <a href="#" data-page="contact" class="nav-link">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="nav-icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle dark or light theme">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="nav-icon-btn" id="searchToggle" title="Search" aria-label="Open search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+                <button class="nav-icon-btn" data-page="wishlist" title="Wishlist" aria-label="View wishlist">
+                    <i class="fas fa-heart" aria-hidden="true"></i>
+                    <span class="badge" id="wishlistBadge">0</span>
+                </button>
+                <button class="nav-icon-btn" id="cartToggle" title="Cart" aria-label="Open shopping bag">
+                    <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                    <span class="badge" id="cartBadge">0</span>
+                </button>
+                <a href="#" data-page="editor" class="nav-cta" style="background:var(--accent);color:var(--primary-dark);border-color:var(--accent);">Editor</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-inner">
+            <a href="#" data-page="home" class="mobile-link">Home</a>
+            <a href="#" data-page="products" class="mobile-link">Shop</a>
+            <a href="#" data-page="about" class="mobile-link">About</a>
+            <a href="#" data-page="sustainability" class="mobile-link">Sustainability</a>
+            <a href="#" data-page="blog" class="mobile-link">Journal</a>
+            <a href="#" data-page="contact" class="mobile-link">Contact</a>
+            <a href="#" data-page="editor" class="mobile-link">Editor</a>
+        </div>
+    </div>
+
+    <!-- SEARCH OVERLAY -->
+    <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search">
+        <div class="search-overlay-inner">
+            <label class="sr-only" for="searchInput">Search products, ingredients, benefits</label>
+            <input type="text" id="searchInput" name="search" placeholder="Search products, ingredients, benefits…" autocomplete="off" spellcheck="false" enterkeyhint="search">
+            <button class="search-close" id="searchClose" aria-label="Close search"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main id="app"></main>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true" aria-label="Shopping bag">
+        <div class="cart-header">
+            <h3>Your Bag</h3>
+            <button class="cart-close" id="cartClose" aria-label="Close shopping bag"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">Rs.0</span>
+            </div>
+            <div class="cart-shipping">
+                <span>Shipping</span>
+                <span id="cartShipping">Calculated at checkout</span>
+            </div>
+            <a href="#" data-page="checkout" class="btn btn-primary btn-full cart-checkout-btn">Proceed to Checkout</a>
+            <a href="#" data-page="products" class="btn btn-ghost btn-full">Continue Shopping</a>
+        </div>
+    </aside>
+
+    <!-- TOAST -->
+    <div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/923474736347?text=Hi%20PendooRoots!%20I'm%20interested%20in%20your%20products."
+       target="_blank" rel="noopener" class="whatsapp-float" id="whatsappFloat" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat with us!</span>
+    </a>
+
+    <!-- FOOTER (rendered by JS) -->
+
+    <!-- PAGE SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
