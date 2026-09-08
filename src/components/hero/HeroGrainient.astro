@@ -1,29 +1,26 @@
 ---
-// HeroGrainient — WebGL animated gradient background (OGL)
+// HeroGrainient — WebGL animated gradient (exact React Bits port)
 ---
 
-<div class="hero-grainient" data-grainient aria-hidden="true"></div>
+<div class="grainient-container" data-grainient aria-hidden="true"></div>
 
 <style>
-  .hero-grainient {
+  .grainient-container {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    z-index: 0;
   }
 
-  .hero-grainient :global(canvas) {
+  .grainient-container :global(canvas) {
     display: block;
     width: 100%;
     height: 100%;
   }
 
-  .grainient-active {
-    opacity: 1;
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .hero-grainient :global(canvas) {
+    .grainient-container :global(canvas) {
       display: none;
     }
   }
