@@ -82,7 +82,7 @@ const fullOgImage = new URL(ogImage, siteUrl).href;
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <!-- PRELOADER -->
+  <!-- PRELOADER (CSS-only, no JS dependency) -->
   <div id="preloader" role="status" aria-label="Loading">
     <div class="preloader-inner">
       <div class="preloader-logo">PENDOOROOTS</div>
@@ -90,6 +90,41 @@ const fullOgImage = new URL(ogImage, siteUrl).href;
       <div class="preloader-text">Nature Perfected</div>
     </div>
   </div>
+  <style>
+    #preloader {
+      position: fixed; inset: 0; z-index: 10000;
+      background: #003513;
+      display: flex; align-items: center; justify-content: center;
+      animation: preloaderHide 0.6s ease 2.8s forwards;
+    }
+    .preloader-logo {
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-size: 2.5rem; font-weight: 800;
+      color: #ccff00; letter-spacing: 0.3em;
+      margin-bottom: 32px;
+      opacity: 0; animation: preloaderFadeIn 0.8s 0.2s forwards;
+    }
+    .preloader-bar {
+      width: 200px; height: 2px;
+      background: rgba(255,255,255,0.1);
+      margin: 0 auto 16px; border-radius: 2px; overflow: hidden;
+    }
+    .preloader-fill {
+      width: 0; height: 100%;
+      background: #ccff00;
+      animation: preloaderFill 2s 0.4s ease-in-out forwards;
+    }
+    .preloader-text {
+      font-size: 0.85rem; color: rgba(255,255,255,0.5);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      opacity: 0; animation: preloaderFadeIn 0.8s 0.6s forwards;
+    }
+    @keyframes preloaderFadeIn { to { opacity: 1; } }
+    @keyframes preloaderFill { to { width: 100%; } }
+    @keyframes preloaderHide {
+      to { opacity: 0; visibility: hidden; pointer-events: none; }
+    }
+  </style>
 
   <!-- CURSOR (desktop only) -->
   <div id="cursor" class="custom-cursor" aria-hidden="true"></div>

@@ -302,16 +302,7 @@ function initTestimonialScroll(): void {
   requestAnimationFrame(autoScroll);
 }
 
-// Preloader
-function initPreloader(): void {
-  const preloader = document.getElementById('preloader');
-  if (!preloader) return;
-
-  // Hide once page is fully loaded, or after 3s max
-  const hide = () => preloader.classList.add('hide');
-  window.addEventListener('load', hide);
-  setTimeout(hide, 3000);
-}
+// Preloader is CSS-only (animation in BaseLayout.astro), no JS needed
 
 // Navigation (client-side routing for SPA-like behavior)
 function initNavigation(): void {
@@ -341,10 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRevealAnimations();
   initCounters();
 
-  // Preloader hides on load
-  initPreloader();
-
-  // Delay heavy initializations until after preloader
+  // Heavy initializations (delayed)
   setTimeout(() => {
     initCursor();
     initHeroParticles();
