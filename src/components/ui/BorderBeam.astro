@@ -1,0 +1,101 @@
+---
+// BorderBeam — animated gradient border effect
+interface Props {
+  duration?: number;
+  size?: number;
+  colorFrom?: string;
+  colorTo?: string;
+  class?: string;
+}
+
+const {
+  duration = 6,
+  size = 120,
+  colorFrom = '#ccff00',
+  colorTo = '#4caf50',
+  class: className = ''
+} = Astro.props;
+---
+
+<div class:list={['border-beam-wrapper', className]} style={`--beam-duration:${duration}s;--beam-size:${size}px;--beam-from:${colorFrom};--beam-to:${colorTo};`}>
+  <slot />
+  <div class="border-beam" aria-hidden="true"></div>
+</div>
+
+<style>
+  .border-beam-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .border-beam {
+    position: absolute;
+    inset: -2px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .border-beam-wrapper:hover .border-beam,
+  .border-beam-wrapper.border-beam-active .border-beam {
+    opacity: 1;
+  }
+
+  .border-beam::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(
+      from var(--beam-angle, 0deg),
+      var(--beam-from),
+      var(--beam-to),
+      transparent,
+      var(--beam-to),
+      var(--beam-from)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: beamRotate var(--beam-duration) linear infinite;
+  }
+
+  .border-beam::after {
+    content: '';
+    position: absolute;
+    width: var(--beam-size);
+    height: var(--beam-size);
+    background: radial-gradient(circle, var(--beam-from), transparent 70%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    offset-path: rect(0 100% 100% 0 round 2px);
+    animation: beamOrbit var(--beam-duration) linear infinite;
+    filter: blur(4px);
+    opacity: 0.7;
+  }
+
+  @keyframes beamRotate {
+    from { --beam-angle: 0deg; }
+    to { --beam-angle: 360deg; }
+  }
+
+  @keyframes beamOrbit {
+    from { offset-distance: 0%; }
+    to { offset-distance: 100%; }
+  }
+
+  @property --beam-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+</style>

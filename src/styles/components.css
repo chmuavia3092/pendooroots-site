@@ -979,11 +979,16 @@
 }
 
 /* ── WHATSAPP FLOAT ── */
-.whatsapp-float {
+.whatsapp-beam {
   position: fixed;
   bottom: 28px;
   left: 28px;
   z-index: 998;
+  border-radius: 50%;
+}
+
+.whatsapp-float {
+  position: relative;
   width: 60px;
   height: 60px;
   background: #25D366;

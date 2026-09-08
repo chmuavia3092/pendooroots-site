@@ -2,9 +2,9 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/hero/Hero.astro';
 import ProductCard from '@/components/product/ProductCard.astro';
-import { heroContent } from '@/data/content';
-import { getBestSellers, getFeaturedProducts, getProductsByCollection } from '@/data/products';
-import { featuresContent, testimonialsContent, collectionsContent } from '@/data/content';
+import BorderBeam from '@/components/ui/BorderBeam.astro';
+import { products, getBestSellers, getFeaturedProducts, getProductsByCollection } from '@/data/products';
+import { heroContent, featuresContent, testimonialsContent, collectionsContent } from '@/data/content';
 ---
 
 <BaseLayout title="LEMOO Washer by PENDOOROOTS — Make Every Dish Shine">
@@ -164,16 +164,17 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
 
   <!-- Newsletter -->
   <section class="newsletter-section">
-    <div class="newsletter-glow"></div>
-    <div class="newsletter-inner reveal">
-      <h2 class="newsletter-title">Join the <em>PendooRoots</em> Family</h2>
-      <p class="newsletter-desc">Subscribe for exclusive offers, skincare tips, and early access to new collections.</p>
-      <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Welcome to the PendooRoots family!', 'success'); this.reset();">
-        <label class="sr-only" for="nl_email">Email address</label>
-        <input id="nl_email" name="email" type="email" placeholder="Enter your email…" autocomplete="email" required>
-        <button type="submit">Subscribe</button>
-      </form>
-    </div>
+    <BorderBeam duration={8} size={150} colorFrom="#ccff00" colorTo="#4caf50">
+      <div class="newsletter-inner reveal">
+        <h2 class="newsletter-title">Join the <em>PendooRoots</em> Family</h2>
+        <p class="newsletter-desc">Subscribe for exclusive offers, skincare tips, and early access to new collections.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Welcome to the PendooRoots family!', 'success'); this.reset();">
+          <label class="sr-only" for="nl_email">Email address</label>
+          <input id="nl_email" name="email" type="email" placeholder="Enter your email…" autocomplete="email" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </BorderBeam>
   </section>
 </BaseLayout>
 
