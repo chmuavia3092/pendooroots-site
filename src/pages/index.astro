@@ -67,8 +67,8 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
           const count = getProductsByCollection(key as any).length;
           const img = getProductsByCollection(key as any)[0]?.image || '';
           return (
-            <a href="/shop" class="category-card reveal reveal-delay-{i+1}">
-              <div class="category-card-bg" style="background-image:url('{img}')"></div>
+            <a href="/shop" class={`category-card reveal reveal-delay-${i+1}`}>
+              <div class="category-card-bg" style={`background-image:url('${img}')`}></div>
               <div class="category-card-overlay"></div>
               <div class="category-card-content">
                 <div class="category-card-count">{count} Products</div>
@@ -109,7 +109,7 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
         <div class="testimonial-track" id="testimonialTrack">
           {testimonialsContent.map(t => (
             <div class="testimonial-card">
-              <div class="testimonial-stars">{'<i class="fas fa-star"></i>'.repeat(t.rating)}</div>
+              <div class="testimonial-stars" set:html={'<i class="fas fa-star"></i>'.repeat(t.rating)} />
               <p class="testimonial-text">"{t.text}"</p>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">{t.name.charAt(0)}</div>
