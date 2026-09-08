@@ -30,6 +30,7 @@ export interface TestimonialContent {
   name: string;
   text: string;
   rating: number;
+  avatar: string;
 }
 
 export interface FAQContent {
@@ -76,9 +77,12 @@ export const featuresContent: FeatureContent[] = [
 
 // Testimonials
 export const testimonialsContent: TestimonialContent[] = [
-  { name: 'Priya Sharma', text: 'The Rose Body Wash is absolutely divine. It turns my shower into a luxury spa experience.', rating: 5 },
-  { name: 'Ananya Patel', text: 'Finally, cleaning products that are both effective AND natural.', rating: 5 },
-  { name: 'Vikram Singh', text: 'The Botanical Luxury Shampoo transformed my hair. Remarkable difference.', rating: 5 }
+  { name: 'Priya Sharma', text: 'The Rose Body Wash is absolutely divine. It turns my shower into a luxury spa experience.', rating: 5, avatar: 'https://randomuser.me/api/portraits/women/44.jpg' },
+  { name: 'Ananya Patel', text: 'Finally, cleaning products that are both effective AND natural.', rating: 5, avatar: 'https://randomuser.me/api/portraits/women/68.jpg' },
+  { name: 'Vikram Singh', text: 'The Botanical Luxury Shampoo transformed my hair. Remarkable difference.', rating: 5, avatar: 'https://randomuser.me/api/portraits/men/32.jpg' },
+  { name: 'Meera Joshi', text: 'The Aloe Vera Hand Wash is gentle yet effective. My skin has never felt better.', rating: 5, avatar: 'https://randomuser.me/api/portraits/women/26.jpg' },
+  { name: 'Arjun Mehta', text: 'PENDOOROOTS products are worth every rupee. Premium quality at fair prices.', rating: 5, avatar: 'https://randomuser.me/api/portraits/men/45.jpg' },
+  { name: 'Zara Khan', text: 'Love the natural fragrance! No harsh chemicals, just pure botanical goodness.', rating: 5, avatar: 'https://randomuser.me/api/portraits/women/33.jpg' }
 ];
 
 // FAQs

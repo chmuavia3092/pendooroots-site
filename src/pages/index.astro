@@ -113,7 +113,7 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
               <div class="testimonial-stars" set:html={'<i class="fas fa-star"></i>'.repeat(t.rating)} />
               <p class="testimonial-text">"{t.text}"</p>
               <div class="testimonial-author">
-                <div class="testimonial-avatar">{t.name.charAt(0)}</div>
+                <img class="testimonial-avatar" src={t.avatar} alt={t.name} width="56" height="56" loading="lazy" />
                 <div>
                   <div class="testimonial-name">{t.name}</div>
                   <div class="testimonial-role">Verified Customer</div>
@@ -446,16 +446,13 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
   }
 
   .testimonial-avatar {
-    width: 44px;
-    height: 44px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: var(--color-bg-alt);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
-    font-size: var(--text-base);
+    object-fit: cover;
+    border: 2px solid #ccff00;
+    flex-shrink: 0;
+    background: var(--color-primary-dark);
   }
 
   .testimonial-name {
