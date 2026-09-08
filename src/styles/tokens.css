@@ -24,6 +24,7 @@
   /* ── Typography ── */
   --font-family-display: 'Playfair Display', Georgia, serif;
   --font-family-ui: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-family-script: 'Imperial Script', cursive;
   --font-family-mono: 'SF Mono', 'Fira Code', monospace;
 
   --text-xs: 0.75rem;
