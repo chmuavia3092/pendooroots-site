@@ -1,16 +1,17 @@
 /**
  * HeroGrainient — WebGL Grainient Background (OGL)
- * Hydrated with client:load
+ * Adapted from React Bits Grainient component
+ * PENDOOROOTS green color scheme
  */
 
-const GRAINIENT_VERT = `#version 300 es
+const VERT = `#version 300 es
 in vec2 position;
 void main() {
   gl_Position = vec4(position, 0.0, 1.0);
 }
 `;
 
-const GRAINIENT_FRAG = `#version 300 es
+const FRAG = `#version 300 es
 precision highp float;
 uniform vec2 iResolution;
 uniform float iTime;
@@ -35,12 +36,13 @@ uniform float uZoom;
 uniform vec3 uColor1;
 uniform vec3 uColor2;
 uniform vec3 uColor3;
+uniform float uLightMode;
 out vec4 fragColor;
 #define S(a,b,t) smoothstep(a,b,t)
 mat2 Rot(float a){float s=sin(a),c=cos(a);return mat2(c,-s,s,c);}
 vec2 hash(vec2 p){p=vec2(dot(p,vec2(2127.1,81.17)),dot(p,vec2(1269.5,283.37)));return fract(sin(p)*43758.5453);}
 float noise(vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.0-2.0*f);float n=mix(mix(dot(-1.0+2.0*hash(i+vec2(0.0,0.0)),f-vec2(0.0,0.0)),dot(-1.0+2.0*hash(i+vec2(1.0,0.0)),f-vec2(1.0,0.0)),u.x),mix(dot(-1.0+2.0*hash(i+vec2(0.0,1.0)),f-vec2(0.0,1.0)),dot(-1.0+2.0*hash(i+vec2(1.0,1.0)),f-vec2(1.0,1.0)),u.x),u.y);return 0.5+0.5*n;}
-void mainImage(out vec4 o, vec2 C){
+void mainImage(out vec4 o,vec2 C){
   float t=iTime*uTimeSpeed;
   vec2 uv=C/iResolution.xy;
   float ratio=iResolution.x/iResolution.y;
@@ -79,6 +81,13 @@ void mainImage(out vec4 o, vec2 C){
   col=mix(vec3(luma),col,uSaturation);
   col=pow(max(col,0.0),vec3(1.0/max(uGamma,0.001)));
   col=clamp(col,0.0,1.0);
+  if(uLightMode>0.5){
+    float energy=max(max(col.r,col.g),col.b);
+    vec3 hue=col/max(energy,0.001);
+    float chroma=length(col-vec3(dot(col,vec3(0.333333))));
+    float coverage=clamp(0.12+chroma*1.15+energy*0.18,0.0,0.88);
+    col=mix(vec3(1.0),clamp(hue*0.58+col*0.18,0.0,1.0),coverage);
+  }
   o=vec4(col,1.0);
 }
 void main(){
@@ -88,29 +97,33 @@ void main(){
 }
 `;
 
-const GRAINIENT_DEFAULTS = {
-  timeSpeed: 0.25,
-  colorBalance: 0,
-  warpStrength: 1,
-  warpFrequency: 5,
-  warpSpeed: 2,
-  warpAmplitude: 50,
-  blendAngle: 0,
+// PENDOOROOTS botanical green palette
+const COLORS = {
+  color1: '#4caf50',  // bright green (primary light)
+  color2: '#1b5e20',  // deep green (primary)
+  color3: '#0a2e0a',  // darkest green (base)
+};
+
+const DEFAULTS = {
+  timeSpeed: 0.18,
+  colorBalance: 0.0,
+  warpStrength: 1.0,
+  warpFrequency: 5.0,
+  warpSpeed: 1.5,
+  warpAmplitude: 50.0,
+  blendAngle: 0.0,
   blendSoftness: 0.05,
-  rotationAmount: 500,
-  noiseScale: 2,
-  grainAmount: 0.1,
-  grainScale: 2,
+  rotationAmount: 500.0,
+  noiseScale: 2.0,
+  grainAmount: 0.08,
+  grainScale: 2.0,
   grainAnimated: false,
-  contrast: 1.5,
-  gamma: 1,
-  saturation: 1,
-  centerX: 0,
-  centerY: 0,
-  zoom: 0.9,
-  color1: '#ccff00',
-  color2: '#0f7a3d',
-  color3: '#00331a'
+  contrast: 1.4,
+  gamma: 1.0,
+  saturation: 1.1,
+  centerX: 0.0,
+  centerY: 0.0,
+  zoom: 0.85,
 };
 
 function hexToRgb(hex: string): [number, number, number] {
@@ -127,7 +140,6 @@ export function initGrainient(container: HTMLElement): () => void {
 
   let cancelled = false;
 
-  // Dynamic import OGL
   import('ogl').then(({ Renderer, Program, Mesh, Triangle }) => {
     if (cancelled || !container.isConnected) return;
 
@@ -139,7 +151,7 @@ export function initGrainient(container: HTMLElement): () => void {
         dpr: Math.min(window.devicePixelRatio || 1, 2)
       });
       const gl = renderer.gl;
-      const canvas = gl.canvas;
+      const canvas = gl.canvas as HTMLCanvasElement;
       canvas.style.width = '100%';
       canvas.style.height = '100%';
       canvas.style.display = 'block';
@@ -147,32 +159,33 @@ export function initGrainient(container: HTMLElement): () => void {
 
       const geometry = new Triangle(gl);
       const program = new Program(gl, {
-        vertex: GRAINIENT_VERT,
-        fragment: GRAINIENT_FRAG,
+        vertex: VERT,
+        fragment: FRAG,
         uniforms: {
-          iTime: { value: 0 },
-          iResolution: { value: new Float32Array([1, 1]) },
-          uTimeSpeed: { value: GRAINIENT_DEFAULTS.timeSpeed },
-          uColorBalance: { value: GRAINIENT_DEFAULTS.colorBalance },
-          uWarpStrength: { value: GRAINIENT_DEFAULTS.warpStrength },
-          uWarpFrequency: { value: GRAINIENT_DEFAULTS.warpFrequency },
-          uWarpSpeed: { value: GRAINIENT_DEFAULTS.warpSpeed },
-          uWarpAmplitude: { value: GRAINIENT_DEFAULTS.warpAmplitude },
-          uBlendAngle: { value: GRAINIENT_DEFAULTS.blendAngle },
-          uBlendSoftness: { value: GRAINIENT_DEFAULTS.blendSoftness },
-          uRotationAmount: { value: GRAINIENT_DEFAULTS.rotationAmount },
-          uNoiseScale: { value: GRAINIENT_DEFAULTS.noiseScale },
-          uGrainAmount: { value: GRAINIENT_DEFAULTS.grainAmount },
-          uGrainScale: { value: GRAINIENT_DEFAULTS.grainScale },
-          uGrainAnimated: { value: GRAINIENT_DEFAULTS.grainAnimated ? 1 : 0 },
-          uContrast: { value: GRAINIENT_DEFAULTS.contrast },
-          uGamma: { value: GRAINIENT_DEFAULTS.gamma },
-          uSaturation: { value: GRAINIENT_DEFAULTS.saturation },
-          uCenterOffset: { value: new Float32Array([GRAINIENT_DEFAULTS.centerX, GRAINIENT_DEFAULTS.centerY]) },
-          uZoom: { value: GRAINIENT_DEFAULTS.zoom },
-          uColor1: { value: new Float32Array(hexToRgb(GRAINIENT_DEFAULTS.color1)) },
-          uColor2: { value: new Float32Array(hexToRgb(GRAINIENT_DEFAULTS.color2)) },
-          uColor3: { value: new Float32Array(hexToRgb(GRAINIENT_DEFAULTS.color3)) }
+          iTime:           { value: 0 },
+          iResolution:     { value: new Float32Array([1, 1]) },
+          uTimeSpeed:      { value: DEFAULTS.timeSpeed },
+          uColorBalance:   { value: DEFAULTS.colorBalance },
+          uWarpStrength:   { value: DEFAULTS.warpStrength },
+          uWarpFrequency:  { value: DEFAULTS.warpFrequency },
+          uWarpSpeed:      { value: DEFAULTS.warpSpeed },
+          uWarpAmplitude:  { value: DEFAULTS.warpAmplitude },
+          uBlendAngle:     { value: DEFAULTS.blendAngle },
+          uBlendSoftness:  { value: DEFAULTS.blendSoftness },
+          uRotationAmount: { value: DEFAULTS.rotationAmount },
+          uNoiseScale:     { value: DEFAULTS.noiseScale },
+          uGrainAmount:    { value: DEFAULTS.grainAmount },
+          uGrainScale:     { value: DEFAULTS.grainScale },
+          uGrainAnimated:  { value: DEFAULTS.grainAnimated ? 1 : 0 },
+          uContrast:       { value: DEFAULTS.contrast },
+          uGamma:          { value: DEFAULTS.gamma },
+          uSaturation:     { value: DEFAULTS.saturation },
+          uCenterOffset:   { value: new Float32Array([DEFAULTS.centerX, DEFAULTS.centerY]) },
+          uZoom:           { value: DEFAULTS.zoom },
+          uColor1:         { value: new Float32Array(hexToRgb(COLORS.color1)) },
+          uColor2:         { value: new Float32Array(hexToRgb(COLORS.color2)) },
+          uColor3:         { value: new Float32Array(hexToRgb(COLORS.color3)) },
+          uLightMode:      { value: 0.0 }
         }
       });
 
@@ -183,7 +196,7 @@ export function initGrainient(container: HTMLElement): () => void {
         const w = Math.max(1, Math.floor(rect.width));
         const h = Math.max(1, Math.floor(rect.height));
         renderer.setSize(w, h);
-        const res = program.uniforms.iResolution.value;
+        const res = program.uniforms.iResolution.value as Float32Array;
         res[0] = gl.drawingBufferWidth;
         res[1] = gl.drawingBufferHeight;
         renderer.render({ scene: mesh });
@@ -222,22 +235,21 @@ export function initGrainient(container: HTMLElement): () => void {
       tryStart();
       container.classList.add('grainient-active');
 
-      // Return cleanup function
       return () => {
         cancelled = true;
         tryStop();
         ro.disconnect();
         io.disconnect();
         document.removeEventListener('visibilitychange', onVisibility);
-        if (canvas.parentNode === container) container.removeChild(canvas);
-        if (gl && gl.getExtension) gl.getExtension('WEBGL_lose_context')?.loseContext();
+        try { container.removeChild(canvas); } catch {}
+        try { gl.getExtension('WEBGL_lose_context')?.loseContext(); } catch {}
       };
     } catch (err) {
       console.error('Grainient: init failed', err);
       return () => {};
     }
   }).catch(err => {
-    console.error('Grainient: failed to load OGL', err);
+    console.error('Grainient: OGL load failed', err);
     return () => {};
   });
 
