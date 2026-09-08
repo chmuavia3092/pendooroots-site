@@ -1,0 +1,78 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Terms of Service — PENDOOROOTS" description="Terms and conditions for using PendooRoots products and services.">
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+      <h1 class="page-hero-title">Terms of <span class="accent">Service</span></h1>
+      <p class="page-hero-desc">Terms and conditions</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="policy-content reveal">
+        <div class="policy-meta">
+          <span>Last updated: January 1, 2024</span>
+        </div>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using the PendooRoots website and purchasing our products, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, please do not use our website or services.</p>
+
+        <h2>2. Products and Orders</h2>
+        <p>All products are subject to availability. We reserve the right to discontinue any product at any time. Prices for our products are subject to change without notice. We shall not be liable to you or to any third party for any modification, price change, suspension, or discontinuance of a product.</p>
+
+        <h2>3. Payment</h2>
+        <p>We accept payments through secure, verified payment processors. All transactions are encrypted and processed safely. We do not store your payment information on our servers.</p>
+
+        <h2>4. Shipping and Delivery</h2>
+        <p>Standard shipping within Pakistan takes 3-5 business days. Express shipping delivers within 1-2 business days. Delivery times are estimates and may vary based on location and carrier availability. We are not responsible for delays caused by customs or unforeseen circumstances.</p>
+
+        <h2>5. Returns and Refunds</h2>
+        <p>We offer a 30-day satisfaction guarantee. If you are not satisfied with your purchase, contact us within 30 days of delivery for a full refund or exchange. Products must be returned in their original packaging and condition. Refunds are processed within 5-7 business days of receiving the returned item.</p>
+
+        <h2>6. Intellectual Property</h2>
+        <p>All content on this website, including text, images, logos, and designs, is the property of PendooRoots and protected by intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.</p>
+
+        <h2>7. Limitation of Liability</h2>
+        <p>PendooRoots shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or website. Our total liability shall not exceed the purchase price of the product in question.</p>
+
+        <h2>8. Contact</h2>
+        <p>For questions about these Terms of Service, contact us at <a href="mailto:ibmilyas347@gmail.com">ibmilyas347@gmail.com</a> or write to us at 42 Botanical Lane, Garden District, Karachi.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 160px 0 80px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #003513 0%, #004b1c 40%, #006b2a 70%, #1a8a4a 100%);
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 20% 80%, rgba(204,255,0,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(204,255,0,0.08) 0%, transparent 50%);
+  }
+  .page-hero-title {
+    font-family: var(--font-family-display); font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #fff; font-weight: 500; line-height: 1.1; position: relative; z-index: 1;
+  }
+  .page-hero-title .accent { color: var(--color-accent); font-style: italic; }
+  .page-hero-desc {
+    color: rgba(255,255,255,0.6); font-size: 1.1rem; margin-top: 16px;
+    max-width: 500px; font-weight: 300; position: relative; z-index: 1;
+  }
+  .policy-content { max-width: 720px; margin: 0 auto; }
+  .policy-meta { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--color-border); }
+  .policy-content h2 {
+    font-family: var(--font-family-display); font-size: 1.3rem; font-weight: 600;
+    margin-top: 32px; margin-bottom: 12px; color: var(--color-text);
+  }
+  .policy-content p {
+    color: var(--color-text-secondary); line-height: 1.8; font-size: 0.95rem; font-weight: 300; margin-bottom: 8px;
+  }
+  .policy-content a { color: var(--color-primary); text-decoration: underline; }
+</style>

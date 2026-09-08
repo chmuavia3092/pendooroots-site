@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ProductCard from '@/components/product/ProductCard.astro';
+import { products } from '@/data/products';
+---
+
+<BaseLayout title="Shop — PENDOOROOTS">
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+      <h1 class="page-hero-title">Our <span class="accent">Products</span></h1>
+      <p class="page-hero-desc">Discover premium botanical care for every aspect of your daily ritual.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="products-grid">
+        {products.map((p, i) => (
+          <ProductCard product={p} index={i} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 160px 0 80px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #003513 0%, #004b1c 40%, #006b2a 70%, #1a8a4a 100%);
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(204,255,0,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(204,255,0,0.08) 0%, transparent 50%);
+  }
+  .page-hero-title {
+    font-family: var(--font-family-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #fff; font-weight: 500; line-height: 1.1;
+    position: relative; z-index: 1;
+  }
+  .page-hero-title .accent { color: var(--color-accent); font-style: italic; }
+  .page-hero-desc {
+    color: rgba(255,255,255,0.6); font-size: 1.1rem; margin-top: 16px;
+    max-width: 500px; font-weight: 300; position: relative; z-index: 1;
+  }
+</style>

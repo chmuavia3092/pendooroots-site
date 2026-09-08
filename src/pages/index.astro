@@ -11,7 +11,8 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
   <Hero content={heroContent} />
 
   <!-- Why PendooRoots -->
-  <section class="section">
+  <!-- Why PendooRoots -->
+  <section class="section section-gradient-1">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-tag"><i class="fas fa-star"></i> Why PendooRoots</div>
@@ -31,7 +32,7 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
   </section>
 
   <!-- Best Sellers -->
-  <section class="section" style="background: var(--color-bg-alt);">
+  <section class="section section-gradient-2" style="background: linear-gradient(180deg, #f0f5f1 0%, #e8f0e9 50%, #f0f5f1 100%);">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-tag"><i class="fas fa-fire"></i> Best Sellers</div>
@@ -55,7 +56,7 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
   </section>
 
   <!-- Collections -->
-  <section class="section">
+  <section class="section section-gradient-3" style="background: linear-gradient(180deg, #ffffff 0%, #f5f8f6 50%, #ffffff 100%);">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-tag"><i class="fas fa-th-large"></i> Collections</div>
@@ -83,7 +84,7 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
   </section>
 
   <!-- Featured Products -->
-  <section class="section" style="background: var(--color-bg-alt);">
+  <section class="section section-gradient-4" style="background: linear-gradient(180deg, #f0f5f1 0%, #e5ede7 50%, #f0f5f1 100%);">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-tag"><i class="fas fa-th-large"></i> Featured</div>
@@ -99,7 +100,7 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
   </section>
 
   <!-- Testimonials -->
-  <section class="section testimonials-section">
+  <section class="section testimonials-section" style="background: linear-gradient(180deg, #ffffff 0%, #f5f8f6 50%, #ffffff 100%);">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-tag"><i class="fas fa-quote-left"></i> Testimonials</div>
@@ -177,6 +178,19 @@ import { featuresContent, testimonialsContent, collectionsContent } from '@/data
 </BaseLayout>
 
 <style>
+  /* Gradient Sections */
+  .section-gradient-1 {
+    background: linear-gradient(180deg, #ffffff 0%, #f5f8f6 30%, #eef3ef 60%, #f5f8f6 100%);
+    position: relative;
+  }
+  .section-gradient-1::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,75,28,0.08), transparent);
+  }
+
   /* Feature Cards */
   .features-grid {
     display: grid;

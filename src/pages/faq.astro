@@ -1,0 +1,83 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { faqsContent } from '@/data/content';
+---
+
+<BaseLayout title="FAQ — PENDOOROOTS" description="Frequently asked questions about PendooRoots products, shipping, returns, and more.">
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+      <h1 class="page-hero-title">Frequently Asked <span class="accent">Questions</span></h1>
+      <p class="page-hero-desc">Frequently asked questions</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="faq-list">
+        {faqsContent.map((faq, i) => (
+          <details class={`faq-item reveal reveal-delay-${Math.min(i + 1, 4)}`} key={i}>
+            <summary class="faq-question">
+              <span>{faq.q}</span>
+              <i class="fas fa-plus faq-icon" aria-hidden="true"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-bg-alt);">
+    <div class="container">
+      <div class="faq-cta reveal">
+        <h2>Still have <span class="accent">questions?</span></h2>
+        <p>We're here to help. Reach out and we'll get back to you within 24 hours.</p>
+        <a href="/contact" class="btn btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 160px 0 80px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #003513 0%, #004b1c 40%, #006b2a 70%, #1a8a4a 100%);
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 20% 80%, rgba(204,255,0,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(204,255,0,0.08) 0%, transparent 50%);
+  }
+  .page-hero-title {
+    font-family: var(--font-family-display); font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #fff; font-weight: 500; line-height: 1.1; position: relative; z-index: 1;
+  }
+  .page-hero-title .accent { color: var(--color-accent); font-style: italic; }
+  .page-hero-desc {
+    color: rgba(255,255,255,0.6); font-size: 1.1rem; margin-top: 16px;
+    max-width: 500px; font-weight: 300; position: relative; z-index: 1;
+  }
+  .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+  .faq-item {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 0.3s ease;
+  }
+  .faq-item[open] { box-shadow: var(--shadow-sm); }
+  .faq-question {
+    padding: 20px 24px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+    font-weight: 600; font-size: 1rem; color: var(--color-text); list-style: none;
+  }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::marker { display: none; content: ''; }
+  .faq-icon { font-size: 0.8rem; color: var(--color-primary); transition: transform 0.3s ease; flex-shrink: 0; margin-left: 16px; }
+  .faq-item[open] .faq-icon { transform: rotate(45deg); }
+  .faq-answer { padding: 0 24px 20px; }
+  .faq-answer p { color: var(--color-text-secondary); line-height: 1.7; font-size: 0.95rem; font-weight: 300; }
+  .faq-cta { text-align: center; padding: 60px 40px; background: var(--color-surface); border-radius: var(--radius-xl); border: 1px solid var(--color-border); }
+  .faq-cta h2 { font-family: var(--font-family-display); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; margin-bottom: 16px; }
+  .faq-cta .accent { color: var(--color-accent); font-style: italic; }
+  .faq-cta p { color: var(--color-text-secondary); font-size: 1.05rem; margin-bottom: 32px; font-weight: 300; }
+</style>

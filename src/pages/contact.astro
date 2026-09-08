@@ -1,0 +1,120 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact — PENDOOROOTS" description="Get in touch with PendooRoots — we'd love to hear from you.">
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+      <h1 class="page-hero-title">Get in <span class="accent">Touch</span></h1>
+      <p class="page-hero-desc">Get in touch</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="section-tag"><i class="fas fa-envelope"></i> Contact Us</div>
+          <h2 class="contact-heading">We'd love to <span class="accent">hear from you</span></h2>
+          <p class="contact-desc">Have a question, suggestion, or just want to say hello? Reach out through any of these channels and we'll get back to you within 24 hours.</p>
+          <div class="contact-channels">
+            <div class="contact-channel">
+              <div class="contact-channel-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <div class="contact-channel-label">Email</div>
+                <a href="mailto:ibmilyas347@gmail.com" class="contact-channel-value">ibmilyas347@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-channel">
+              <div class="contact-channel-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <div class="contact-channel-label">Phone</div>
+                <a href="tel:+923135442427" class="contact-channel-value">0313-5442427</a>
+              </div>
+            </div>
+            <div class="contact-channel">
+              <div class="contact-channel-icon"><i class="fab fa-whatsapp"></i></div>
+              <div>
+                <div class="contact-channel-label">WhatsApp</div>
+                <a href="https://wa.me/923474736347" target="_blank" rel="noopener" class="contact-channel-value">03474736347</a>
+              </div>
+            </div>
+            <div class="contact-channel">
+              <div class="contact-channel-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <div class="contact-channel-label">Address</div>
+                <span class="contact-channel-value">42 Botanical Lane, Garden District, Karachi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form-wrap reveal reveal-delay-2">
+          <form class="contact-form" action="#" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="How can we help?">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 160px 0 80px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #003513 0%, #004b1c 40%, #006b2a 70%, #1a8a4a 100%);
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 20% 80%, rgba(204,255,0,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(204,255,0,0.08) 0%, transparent 50%);
+  }
+  .page-hero-title {
+    font-family: var(--font-family-display); font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #fff; font-weight: 500; line-height: 1.1; position: relative; z-index: 1;
+  }
+  .page-hero-title .accent { color: var(--color-accent); font-style: italic; }
+  .page-hero-desc {
+    color: rgba(255,255,255,0.6); font-size: 1.1rem; margin-top: 16px;
+    max-width: 500px; font-weight: 300; position: relative; z-index: 1;
+  }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .section-tag { display: inline-flex; align-items: center; gap: 8px; font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 16px; }
+  .contact-heading { font-family: var(--font-family-display); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; line-height: 1.2; margin-bottom: 16px; }
+  .contact-heading .accent { color: var(--color-accent); font-style: italic; }
+  .contact-desc { color: var(--color-text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: 32px; font-weight: 300; }
+  .contact-channels { display: flex; flex-direction: column; gap: 20px; }
+  .contact-channel { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--color-bg-alt); border-radius: var(--radius-lg); border: 1px solid var(--color-border); transition: border-color 0.3s ease; }
+  .contact-channel:hover { border-color: var(--color-primary); }
+  .contact-channel-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--color-primary); color: var(--color-accent); border-radius: var(--radius-md); font-size: 1.1rem; flex-shrink: 0; }
+  .contact-channel-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 4px; }
+  .contact-channel-value { font-size: 0.95rem; color: var(--color-text); text-decoration: none; font-weight: 500; }
+  a.contact-channel-value:hover { color: var(--color-primary); }
+  .contact-form-wrap { background: var(--color-surface); border-radius: var(--radius-xl); border: 1px solid var(--color-border); padding: 40px; }
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
+  .form-group input, .form-group textarea {
+    padding: 14px 16px; border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    background: var(--color-bg); color: var(--color-text); font-family: inherit; font-size: 0.95rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; resize: vertical;
+  }
+  .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(0,75,28,0.1); }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+</style>

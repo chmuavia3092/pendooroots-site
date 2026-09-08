@@ -1,0 +1,75 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Privacy Policy — PENDOOROOTS" description="Your privacy matters. Learn how PendooRoots collects, uses, and protects your personal information.">
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+      <h1 class="page-hero-title">Privacy <span class="accent">Policy</span></h1>
+      <p class="page-hero-desc">Your privacy matters</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="policy-content reveal">
+        <div class="policy-meta">
+          <span>Last updated: January 1, 2024</span>
+        </div>
+
+        <h2>1. Information We Collect</h2>
+        <p>We collect information you provide directly, including your name, email address, shipping address, phone number, and payment details when you make a purchase or create an account. We also collect browsing data such as pages visited, products viewed, and interaction patterns to improve our services.</p>
+
+        <h2>2. How We Use Your Information</h2>
+        <p>Your information is used to process orders, deliver products, send order updates, provide customer support, personalize your experience, and improve our website. We may also send promotional emails about new products, special offers, or other information we think you may find interesting, with your consent.</p>
+
+        <h2>3. Data Protection</h2>
+        <p>We implement industry-standard security measures to protect your personal information. All payment transactions are encrypted using SSL technology. Your data is stored on secure servers and is only accessed by authorized personnel who need it to perform their job functions.</p>
+
+        <h2>4. Cookie Policy</h2>
+        <p>Our website uses cookies to enhance your browsing experience, analyze site traffic, and personalize content. You can choose to disable cookies through your browser settings, though some features of the site may not function properly without them.</p>
+
+        <h2>5. Third-Party Sharing</h2>
+        <p>We do not sell, trade, or rent your personal information to third parties. We may share data with trusted service providers who assist in operating our website, conducting business, or servicing you, provided they agree to keep this information confidential.</p>
+
+        <h2>6. Your Rights</h2>
+        <p>You have the right to access, correct, or delete your personal data. You can update your account information at any time or contact us directly to request data removal. We will respond to all requests within 30 days.</p>
+
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:ibmilyas347@gmail.com">ibmilyas347@gmail.com</a> or write to us at 42 Botanical Lane, Garden District, Karachi.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 160px 0 80px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #003513 0%, #004b1c 40%, #006b2a 70%, #1a8a4a 100%);
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 20% 80%, rgba(204,255,0,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(204,255,0,0.08) 0%, transparent 50%);
+  }
+  .page-hero-title {
+    font-family: var(--font-family-display); font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #fff; font-weight: 500; line-height: 1.1; position: relative; z-index: 1;
+  }
+  .page-hero-title .accent { color: var(--color-accent); font-style: italic; }
+  .page-hero-desc {
+    color: rgba(255,255,255,0.6); font-size: 1.1rem; margin-top: 16px;
+    max-width: 500px; font-weight: 300; position: relative; z-index: 1;
+  }
+  .policy-content { max-width: 720px; margin: 0 auto; }
+  .policy-meta { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--color-border); }
+  .policy-content h2 {
+    font-family: var(--font-family-display); font-size: 1.3rem; font-weight: 600;
+    margin-top: 32px; margin-bottom: 12px; color: var(--color-text);
+  }
+  .policy-content p {
+    color: var(--color-text-secondary); line-height: 1.8; font-size: 0.95rem; font-weight: 300; margin-bottom: 8px;
+  }
+  .policy-content a { color: var(--color-primary); text-decoration: underline; }
+</style>

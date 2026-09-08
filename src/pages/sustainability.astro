@@ -1,0 +1,92 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Sustainability — PENDOOROOTS" description="Our commitment to the planet — eco packaging, natural ingredients, carbon neutral shipping, and zero waste.">
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+      <h1 class="page-hero-title">Sustainability <span class="accent">Commitment</span></h1>
+      <p class="page-hero-desc">Our commitment to the planet</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag"><i class="fas fa-leaf"></i> Our Promise</div>
+        <h2 class="section-title">Clean Products, <span class="accent">Clean Planet</span></h2>
+        <p class="section-desc">We believe luxury and sustainability are not opposites — they are inseparable. Every decision we make considers its impact on the earth.</p>
+      </div>
+      <div class="sustain-grid">
+        <div class="sustain-card reveal reveal-delay-1">
+          <div class="sustain-icon"><i class="fas fa-box-open"></i></div>
+          <h3>Eco Packaging</h3>
+          <p>All our packaging is made from 100% recycled and recyclable materials. We use soy-based inks and minimal plastic. Our bottles are designed to be reused, not discarded.</p>
+        </div>
+        <div class="sustain-card reveal reveal-delay-2">
+          <div class="sustain-icon"><i class="fas fa-seedling"></i></div>
+          <h3>Natural Ingredients</h3>
+          <p>Every ingredient is sourced from certified organic farms. We never use synthetic chemicals, parabens, sulfates, or artificial fragrances. What goes down your drain matters to us.</p>
+        </div>
+        <div class="sustain-card reveal reveal-delay-3">
+          <div class="sustain-icon"><i class="fas fa-truck"></i></div>
+          <h3>Carbon Neutral Shipping</h3>
+          <p>We offset 100% of our shipping emissions through verified carbon offset programs. From warehouse to your doorstep, our delivery process is climate-conscious.</p>
+        </div>
+        <div class="sustain-card reveal reveal-delay-4">
+          <div class="sustain-icon"><i class="fas fa-recycle"></i></div>
+          <h3>Zero Waste</h3>
+          <p>Our concentrated formulas mean less water, less packaging, and less waste. We donate 1% of revenue to environmental restoration projects across Pakistan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-bg-alt);">
+    <div class="container">
+      <div class="sustain-cta reveal">
+        <h2>Join Us in Making a <span class="accent">Difference</span></h2>
+        <p>Every PendooRoots purchase supports a cleaner planet. Together, we can prove that premium care and environmental responsibility go hand in hand.</p>
+        <a href="/shop" class="btn btn-primary">Shop Sustainably</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 160px 0 80px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #003513 0%, #004b1c 40%, #006b2a 70%, #1a8a4a 100%);
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 20% 80%, rgba(204,255,0,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(204,255,0,0.08) 0%, transparent 50%);
+  }
+  .page-hero-title {
+    font-family: var(--font-family-display); font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #fff; font-weight: 500; line-height: 1.1; position: relative; z-index: 1;
+  }
+  .page-hero-title .accent { color: var(--color-accent); font-style: italic; }
+  .page-hero-desc {
+    color: rgba(255,255,255,0.6); font-size: 1.1rem; margin-top: 16px;
+    max-width: 500px; font-weight: 300; position: relative; z-index: 1;
+  }
+  .section-header { text-align: center; margin-bottom: 60px; }
+  .section-tag { display: inline-flex; align-items: center; gap: 8px; font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 16px; }
+  .section-title { font-family: var(--font-family-display); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 500; line-height: 1.2; }
+  .section-title .accent { color: var(--color-accent); font-style: italic; }
+  .section-desc { color: var(--color-text-secondary); font-size: 1.1rem; margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto; font-weight: 300; }
+  .sustain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .sustain-card { padding: 40px 32px; background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border); transition: transform 0.4s ease, box-shadow 0.4s ease; }
+  .sustain-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .sustain-icon { font-size: 2rem; margin-bottom: 16px; color: var(--color-primary); }
+  .sustain-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+  .sustain-card p { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7; }
+  .sustain-cta { text-align: center; padding: 60px 40px; background: var(--color-surface); border-radius: var(--radius-xl); border: 1px solid var(--color-border); }
+  .sustain-cta h2 { font-family: var(--font-family-display); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; margin-bottom: 16px; }
+  .sustain-cta .accent { color: var(--color-accent); font-style: italic; }
+  .sustain-cta p { color: var(--color-text-secondary); font-size: 1.05rem; margin-bottom: 32px; font-weight: 300; max-width: 500px; margin-left: auto; margin-right: auto; }
+  @media (max-width: 768px) { .sustain-grid { grid-template-columns: 1fr; } }
+</style>
