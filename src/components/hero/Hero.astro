@@ -14,23 +14,11 @@ const { content } = Astro.props;
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-bg" aria-hidden="true">
-    <HeroGrainient />
     <div class="hero-gradient" aria-hidden="true"></div>
-
-    <!-- Floating Shapes (Shape Hero concept) -->
-    <div class="hero-shapes" aria-hidden="true">
-      <div class="elegant-shape shape-1" style="--delay:0.3s;--w:300px;--h:500px;--rotate:-8deg;--r:24px;--grad:rgba(204,255,0,0.12)"></div>
-      <div class="elegant-shape shape-2" style="--delay:0.5s;--w:600px;--h:200px;--rotate:15deg;--r:20px;--grad:rgba(0,75,28,0.25)"></div>
-      <div class="elegant-shape shape-3" style="--delay:0.4s;--w:300px;--h:300px;--rotate:24deg;--r:32px;--grad:rgba(204,255,0,0.08)"></div>
-      <div class="elegant-shape shape-4" style="--delay:0.6s;--w:250px;--h:100px;--rotate:-20deg;--r:12px;--grad:rgba(76,175,80,0.18)"></div>
-      <div class="elegant-shape shape-5" style="--delay:0.7s;--w:400px;--h:150px;--rotate:35deg;--r:16px;--grad:rgba(204,255,0,0.10)"></div>
-      <div class="elegant-shape shape-6" style="--delay:0.2s;--w:200px;--h:200px;--rotate:-25deg;--r:28px;--grad:rgba(0,100,40,0.15)"></div>
-      <div class="elegant-shape shape-7" style="--delay:0.8s;--w:150px;--h:80px;--rotate:45deg;--r:10px;--grad:rgba(204,255,0,0.06)"></div>
-      <div class="elegant-shape shape-8" style="--delay:0.9s;--w:450px;--h:120px;--rotate:-12deg;--r:18px;--grad:rgba(0,75,28,0.12)"></div>
-    </div>
-
-    <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
-    <div class="hero-lightbeam" aria-hidden="true"></div>
+    <div class="hero-pattern" aria-hidden="true"></div>
+    <div class="hero-glow-orb hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow-orb hero-glow-2" aria-hidden="true"></div>
+    <div class="hero-glow-orb hero-glow-3" aria-hidden="true"></div>
   </div>
 
   <div class="hero-content">
@@ -89,7 +77,7 @@ const { content } = Astro.props;
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: var(--color-primary-dark);
+    background: #002e11;
   }
 
   .hero-bg {
@@ -101,94 +89,59 @@ const { content } = Astro.props;
   .hero-gradient {
     position: absolute;
     inset: 0;
-    opacity: 0.55;
     background:
-      radial-gradient(ellipse 80% 60% at 20% 50%, var(--hero-gradient-1) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 80% at 80% 30%, var(--hero-gradient-2) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 70% 60%, var(--hero-gradient-3) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 50% at 50% 80%, var(--hero-gradient-4) 0%, transparent 70%);
+      radial-gradient(ellipse 80% 60% at 15% 50%, rgba(0,75,28,0.9) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 85% 30%, rgba(0,107,42,0.6) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 50% 80%, rgba(0,53,19,0.8) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 70% 60%, rgba(26,138,74,0.3) 0%, transparent 50%),
+      linear-gradient(160deg, #001a0a 0%, #002e11 25%, #004b1c 50%, #006b2a 75%, #003513 100%);
   }
 
-  .hero-particles {
+  .hero-pattern {
     position: absolute;
     inset: 0;
-    overflow: hidden;
+    opacity: 0.03;
+    background-image:
+      radial-gradient(circle at 20% 30%, #ccff00 1px, transparent 1px),
+      radial-gradient(circle at 80% 70%, #ccff00 1px, transparent 1px),
+      radial-gradient(circle at 50% 50%, #ccff00 0.5px, transparent 0.5px);
+    background-size: 60px 60px, 80px 80px, 40px 40px;
   }
 
-  /* ── Floating Shapes (Shape Hero concept) ── */
-  .hero-shapes {
+  .hero-glow-orb {
     position: absolute;
-    inset: 0;
-    overflow: hidden;
-    z-index: 0;
-  }
-
-  .elegant-shape {
-    position: absolute;
-    width: var(--w);
-    height: var(--h);
-    border-radius: var(--r);
-    background: linear-gradient(to right, var(--grad), transparent);
-    backdrop-filter: blur(1px);
-    box-shadow:
-      0 2px 16px -2px rgba(255,255,255,0.03),
-      inset 0 0 0 1px rgba(255,255,255,0.04);
-    opacity: 0;
-    transform: translateY(-150px) rotate(calc(var(--rotate) - 15deg));
-    animation:
-      shapeEnter 2.4s cubic-bezier(0.23, 0.86, 0.39, 0.96) var(--delay) forwards,
-      shapeFloat 12s ease-in-out var(--delay) infinite;
-  }
-
-  .elegant-shape::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10), transparent 70%);
-    pointer-events: none;
-  }
-
-  /* Positions */
-  .shape-1 { top: -10%; left: -15%; }
-  .shape-2 { right: -20%; bottom: -5%; }
-  .shape-3 { top: 40%; left: -5%; }
-  .shape-4 { top: 5%; right: 10%; }
-  .shape-5 { top: 45%; right: -10%; }
-  .shape-6 { bottom: 10%; left: 20%; }
-  .shape-7 { top: 15%; left: 40%; }
-  .shape-8 { top: 60%; left: 25%; }
-
-  @keyframes shapeEnter {
-    0% {
-      opacity: 0;
-      transform: translateY(-150px) rotate(calc(var(--rotate) - 15deg));
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) rotate(var(--rotate));
-    }
-  }
-
-  @keyframes shapeFloat {
-    0%, 100% { transform: translateY(0) rotate(var(--rotate)); }
-    50%      { transform: translateY(15px) rotate(var(--rotate)); }
-  }
-
-  .hero-particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(204, 255, 0, 0.15);
     border-radius: 50%;
-    animation: particleFloat linear infinite;
+    filter: blur(80px);
+    animation: orbFloat 8s ease-in-out infinite;
   }
 
-  @keyframes particleFloat {
-    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+  .hero-glow-1 {
+    width: 400px; height: 400px;
+    top: -10%; left: -5%;
+    background: radial-gradient(circle, rgba(204,255,0,0.15) 0%, transparent 70%);
+    animation-delay: 0s;
+  }
+
+  .hero-glow-2 {
+    width: 300px; height: 300px;
+    bottom: 10%; right: 10%;
+    background: radial-gradient(circle, rgba(0,107,42,0.3) 0%, transparent 70%);
+    animation-delay: 2s;
+    animation-duration: 10s;
+  }
+
+  .hero-glow-3 {
+    width: 250px; height: 250px;
+    top: 40%; left: 60%;
+    background: radial-gradient(circle, rgba(204,255,0,0.08) 0%, transparent 70%);
+    animation-delay: 4s;
+    animation-duration: 12s;
+  }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    33% { transform: translate(20px, -15px) scale(1.1); opacity: 0.9; }
+    66% { transform: translate(-10px, 10px) scale(0.95); opacity: 0.7; }
   }
 
   .hero-content {
@@ -473,18 +426,13 @@ const { content } = Astro.props;
 
   /* Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
-    .hero-particle,
     .hero-product-ring,
     .hero-glow,
     .hero-orbit,
     .hero-scroll-line::after,
     .hero-product-showcase::before,
-    .elegant-shape {
+    .hero-glow-orb {
       animation: none !important;
-    }
-    .elegant-shape {
-      opacity: 1;
-      transform: translateY(0) rotate(var(--rotate));
     }
     .reveal { opacity: 1; transform: none; transition: none; }
   }
