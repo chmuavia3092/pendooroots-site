@@ -9,13 +9,13 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Import components that need hydration
-import '@/components/hero/HeroBottle';
-import '@/components/hero/HeroGrainient';
-import '@/components/ui/SpecularButton';
-import '@/components/ui/StarBorderButton';
-import '@/components/ui/ElectricBorder';
-import '@/components/ui/MagicBento';
+// Dynamic imports for optional components (non-blocking)
+import('@/components/hero/HeroBottle').catch(() => {});
+import('@/components/hero/HeroGrainient').catch(() => {});
+import('@/components/ui/SpecularButton').catch(() => {});
+import('@/components/ui/StarBorderButton').catch(() => {});
+import('@/components/ui/ElectricBorder').catch(() => {});
+import('@/components/ui/MagicBento').catch(() => {});
 
 // Global state
 declare global {
@@ -307,9 +307,10 @@ function initPreloader(): void {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  setTimeout(() => {
-    preloader.classList.add('hide');
-  }, 2200);
+  // Hide once page is fully loaded, or after 3s max
+  const hide = () => preloader.classList.add('hide');
+  window.addEventListener('load', hide);
+  setTimeout(hide, 3000);
 }
 
 // Navigation (client-side routing for SPA-like behavior)
@@ -340,14 +341,16 @@ document.addEventListener('DOMContentLoaded', () => {
   initRevealAnimations();
   initCounters();
 
+  // Preloader hides on load
+  initPreloader();
+
   // Delay heavy initializations until after preloader
   setTimeout(() => {
     initCursor();
     initHeroParticles();
     initHeroSparkles();
     initTestimonialScroll();
-    initPreloader();
-  }, 2300);
+  }, 2500);
 });
 
 // Export for global access (legacy compatibility)
