@@ -1,0 +1,130 @@
+---
+/**
+ * Sustainability — quiet, factual positioning band.
+ */
+---
+
+<section class="sustain section section--dark" id="sustainability">
+  <div class="container">
+    <div class="sustain__grid">
+      <div class="sustain__copy reveal">
+        <p class="eyebrow sustain__eyebrow">Sustainability</p>
+        <h2 class="sustain__title">
+          Rs.20 from every bottle is planted.
+        </h2>
+        <p class="sustain__lede">
+          Every LEMOO bottle funds reforestation through our partnership with
+          local growers. The first 2,000 trees went to Sindh. We publish where
+          every rupee goes — no greenwashing, just receipts.
+        </p>
+        <div class="sustain__actions">
+          <a href="/sustainability" class="btn">Read the full report</a>
+          <a href="/journal/reforestation" class="btn btn--ghost btn--ghost-on-dark">
+            See the first 2,000 trees
+          </a>
+        </div>
+      </div>
+
+      <ul class="sustain__stats" aria-label="Sustainability metrics">
+        <li class="stat reveal" style="transition-delay: 60ms">
+          <span class="stat__value">2,000+</span>
+          <span class="stat__label">Trees planted</span>
+        </li>
+        <li class="stat reveal" style="transition-delay: 140ms">
+          <span class="stat__value">100%</span>
+          <span class="stat__label">Biodegradable</span>
+        </li>
+        <li class="stat reveal" style="transition-delay: 220ms">
+          <span class="stat__value">0</span>
+          <span class="stat__label">Animal testing</span>
+        </li>
+        <li class="stat reveal" style="transition-delay: 300ms">
+          <span class="stat__value">Rs.20</span>
+          <span class="stat__label">Donated per bottle</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sustain {
+    margin-top: var(--space-24);
+  }
+  .sustain__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--space-16);
+    align-items: center;
+  }
+  .sustain__eyebrow {
+    color: var(--color-accent-light);
+  }
+  .sustain__title {
+    color: var(--color-text-inverse);
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tighter);
+  }
+  .sustain__lede {
+    margin-top: var(--space-5);
+    color: rgba(253, 250, 242, 0.78);
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    max-width: 52ch;
+  }
+  .sustain__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+  }
+  .sustain__actions .btn {
+    --btn-bg: var(--color-accent-light);
+    --btn-color: var(--color-primary-dark);
+    --btn-border: var(--color-accent-light);
+    --btn-hover-bg: var(--color-text-inverse);
+    --btn-hover-color: var(--color-primary-dark);
+  }
+  .btn--ghost-on-dark {
+    --btn-bg: transparent;
+    --btn-color: var(--color-text-inverse);
+    --btn-border: rgba(253, 250, 242, 0.4);
+    --btn-hover-bg: var(--color-text-inverse);
+    --btn-hover-color: var(--color-primary-dark);
+  }
+
+  .sustain__stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-1);
+    background: rgba(253, 250, 242, 0.08);
+  }
+  .stat {
+    background: var(--color-primary-dark);
+    padding: var(--space-8) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .stat__value {
+    font-family: var(--font-family-display);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    color: var(--color-text-inverse);
+    letter-spacing: var(--tracking-tight);
+  }
+  .stat__label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: rgba(253, 250, 242, 0.6);
+  }
+
+  @media (max-width: 1024px) {
+    .sustain__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+    }
+  }
+</style>

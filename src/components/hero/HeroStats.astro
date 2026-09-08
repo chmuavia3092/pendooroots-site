@@ -1,0 +1,81 @@
+---
+interface Props {
+  stats: Array<{
+    label: string;
+    value: number;
+    suffix?: string;
+  }>;
+  class?: string;
+}
+
+const { stats, class: className = '' } = Astro.props;
+---
+
+<div class="hero-stats {className}">
+  {stats.map((stat, i) => (
+    <div class="hero-stat reveal reveal-delay-{i + 1}">
+      <div class="hero-stat-value" data-count={stat.value}>0</div>
+      <div class="hero-stat-label">{stat.suffix ? stat.value + stat.suffix : stat.label}</div>
+    </div>
+  ))}
+</div>
+
+<script>
+  // Counter Animation - IntersectionObserver triggered count-up
+  // Tabular numbers for smooth counting
+</script>
+
+<style>
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+  }
+
+  .hero-stat {
+    text-align: left;
+  }
+
+  .hero-stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero-stats {
+      justify-content: center;
+      gap: 32px;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-stats {
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .hero-stat-value {
+      font-size: 1.75rem;
+    }
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-stat-value {
+      opacity: 1;
+    }
+  }
+</style>

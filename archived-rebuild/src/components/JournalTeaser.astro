@@ -1,0 +1,113 @@
+---
+/**
+ * JournalTeaser — editorial card row.
+ */
+import { JOURNAL_TEASERS } from '@data/site';
+---
+
+<section class="journal section section--alt" id="journal">
+  <div class="container">
+    <header class="journal__head reveal">
+      <div>
+        <p class="eyebrow">Journal</p>
+        <h2 class="journal__title">Notes from the workshop.</h2>
+      </div>
+      <a href="/journal" class="btn btn--link">All articles →</a>
+    </header>
+
+    <ul class="journal__grid">
+      {
+        JOURNAL_TEASERS.map((j, i) => (
+          <li class="journal-card reveal" style={`transition-delay: ${i * 80}ms`}>
+            <a href={j.href} class="journal-card__link">
+              <p class="journal-card__meta">
+                <span>{j.category}</span>
+                <span>{j.date}</span>
+              </p>
+              <h3 class="journal-card__title">{j.title}</h3>
+              <p class="journal-card__excerpt">{j.excerpt}</p>
+              <span class="journal-card__cta">Read article</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .journal__head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+  .journal__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  .journal__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-8);
+  }
+  .journal-card__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    height: 100%;
+    padding: var(--space-6) 0;
+  }
+  .journal-card__meta {
+    display: flex;
+    gap: var(--space-3);
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .journal-card__meta span + span::before {
+    content: '·';
+    margin-right: var(--space-3);
+  }
+  .journal-card__title {
+    font-family: var(--font-family-display);
+    font-size: var(--text-2xl);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+    transition: color var(--duration-base) var(--ease-out-expo);
+  }
+  .journal-card__link:hover .journal-card__title {
+    color: var(--color-accent);
+  }
+  .journal-card__excerpt {
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    flex: 1;
+  }
+  .journal-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text);
+    border-bottom: 1px solid currentColor;
+    align-self: start;
+    padding-bottom: 2px;
+  }
+  @media (max-width: 1024px) {
+    .journal__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .journal__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,9 @@
+.vercel
+node_modules/
+dist/
+.astro/
+*.log
+.DS_Store
+Thumbs.db
+archived-rebuild/screenshots/edge-profile/
+archived-rebuild/screenshots/edge-profile2/

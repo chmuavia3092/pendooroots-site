@@ -1,0 +1,98 @@
+---
+/**
+ * Testimonials — restrained editorial quotes.
+ */
+import { TESTIMONIALS } from '@data/site';
+---
+
+<section class="testimonials section">
+  <div class="container">
+    <header class="testimonials__head reveal">
+      <p class="eyebrow">In their words</p>
+      <h2 class="testimonials__title">What our customers tell us.</h2>
+    </header>
+
+    <ul class="testimonials__grid">
+      {
+        TESTIMONIALS.map((t, i) => (
+          <li class="testimonial reveal" style={`transition-delay: ${i * 100}ms`}>
+            <svg class="testimonial__quote" viewBox="0 0 32 24" width="32" height="24" aria-hidden="true" focusable="false">
+              <path
+                d="M0 24V14C0 7 4 2 12 0v5c-4 1.5-6 4.5-6 8h6v11H0zm18 0V14c0-7 4-12 12-14v5c-4 1.5-6 4.5-6 8h6v11H18z"
+                fill="currentColor"
+              />
+            </svg>
+            <blockquote>
+              <p>{t.quote}</p>
+            </blockquote>
+            <footer>
+              <span class="testimonial__author">{t.author}</span>
+              <span class="testimonial__city">{t.city}</span>
+            </footer>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .testimonials__head {
+    max-width: 60ch;
+    margin-bottom: var(--space-12);
+  }
+  .testimonials__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-8);
+  }
+  .testimonial {
+    position: relative;
+    padding: var(--space-8) var(--space-8) var(--space-6);
+    background: var(--color-surface-soft);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .testimonial__quote {
+    color: var(--color-accent);
+    opacity: 0.5;
+  }
+  .testimonial blockquote {
+    margin: 0;
+    flex: 1;
+  }
+  .testimonial blockquote p {
+    font-family: var(--font-family-display);
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+  }
+  .testimonial footer {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-rule);
+    font-size: var(--text-sm);
+  }
+  .testimonial__author {
+    font-weight: var(--font-weight-semibold);
+  }
+  .testimonial__city {
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1024px) {
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

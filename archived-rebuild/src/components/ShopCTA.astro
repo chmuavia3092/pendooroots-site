@@ -1,0 +1,58 @@
+---
+/**
+ * ShopCTA — closing call to action before the footer.
+ */
+---
+
+<section class="shopcta section">
+  <div class="container">
+    <div class="shopcta__band reveal">
+      <p class="eyebrow">Take it home</p>
+      <h2 class="shopcta__title">Start with LEMOO.</h2>
+      <p class="shopcta__lede">
+        One 500ml bottle. 892 reviews. 4.9 out of 5. If LEMOO does not change
+        the way you wash dishes, we will refund you — no questions.
+      </p>
+      <div class="shopcta__actions">
+        <a href="/shop/lemoo-washer" class="btn btn--lg">Shop LEMOO — Rs.320</a>
+        <a href="/shop" class="btn btn--lg btn--ghost">Browse the catalog</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shopcta__band {
+    max-width: 880px;
+    margin-inline: auto;
+    text-align: center;
+    padding: var(--space-16) var(--space-6);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+  }
+  .shopcta__title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: var(--tracking-tighter);
+    margin-bottom: var(--space-4);
+  }
+  .shopcta__lede {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    max-width: 56ch;
+    margin-inline: auto;
+  }
+  .shopcta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+    margin-top: var(--space-8);
+  }
+  @media (max-width: 640px) {
+    .shopcta__band {
+      padding: var(--space-10) var(--space-4);
+    }
+  }
+</style>

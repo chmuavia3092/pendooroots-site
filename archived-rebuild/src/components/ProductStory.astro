@@ -1,0 +1,148 @@
+---
+/**
+ * ProductStory — editorial two-column LEMOO story.
+ */
+import { LEMOO_INGREDIENTS } from '@data/site';
+---
+
+<section class="story section" id="story">
+  <div class="container">
+    <div class="story__grid">
+      <div class="story__media">
+        <img
+          src="/images/products/lemoo-washer.png"
+          alt="LEMOO Washer bottle on a linen surface"
+          class="story__bottle"
+          loading="lazy"
+          decoding="async"
+          width="640"
+          height="800"
+        />
+        <div class="story__media-frame" aria-hidden="true"></div>
+      </div>
+
+      <div class="story__copy reveal">
+        <p class="eyebrow">The Hero Product</p>
+        <h2 class="story__title">
+          A dish wash you can smell, and trust.
+        </h2>
+        <p class="story__lede">
+          Most dish washes smell of chemistry. LEMOO smells of real lemon.
+          We cold-press lemon and citronella essential oils, blend them with a
+          coconut-derived surfactant, and add aloe vera to keep your hands soft.
+          That's it. No sulfates, no parabens, no shortcuts.
+        </p>
+
+        <ul class="story__ingredients">
+          {
+            LEMOO_INGREDIENTS.slice(0, 3).map((ing) => (
+              <li>
+                <span class="story__ing-name">{ing.name}</span>
+                <span class="story__ing-role">{ing.role}</span>
+                <p>{ing.description}</p>
+              </li>
+            ))
+          }
+        </ul>
+
+        <a href="/shop/lemoo-washer" class="btn btn--link">Explore the formula →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .story__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .story__media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: var(--color-surface-soft);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+  .story__media-frame {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.6), transparent 50%),
+      linear-gradient(180deg, var(--color-surface-soft) 0%, var(--color-bg-alt) 100%);
+  }
+  .story__bottle {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 70%;
+    height: 90%;
+    object-fit: contain;
+    filter: drop-shadow(0 24px 32px rgba(20, 20, 20, 0.15));
+  }
+
+  .story__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .story__title {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tighter);
+  }
+
+  .story__lede {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    max-width: 52ch;
+  }
+
+  .story__ingredients {
+    display: grid;
+    gap: var(--space-5);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-rule);
+  }
+  .story__ingredients li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2) var(--space-6);
+    align-items: baseline;
+  }
+  .story__ingredients p {
+    grid-column: 1 / -1;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+  .story__ing-name {
+    font-family: var(--font-family-display);
+    font-size: var(--text-lg);
+    letter-spacing: var(--tracking-tight);
+  }
+  .story__ing-role {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-align: right;
+  }
+
+  @media (max-width: 1024px) {
+    .story__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+    }
+    .story__media {
+      max-width: 420px;
+      margin-inline: auto;
+      width: 100%;
+    }
+  }
+</style>

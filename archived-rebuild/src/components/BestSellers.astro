@@ -1,0 +1,57 @@
+---
+/**
+ * BestSellers — featured product grid.
+ */
+import { getBestSellers } from '@data/products';
+import ProductCard from './ProductCard.astro';
+
+const bestSellers = getBestSellers(6);
+---
+
+<section class="bestsellers section">
+  <div class="container">
+    <header class="bestsellers__head reveal">
+      <div>
+        <p class="eyebrow">Bestsellers</p>
+        <h2 class="bestsellers__title">Loved by kitchens, every day.</h2>
+      </div>
+      <a href="/shop" class="btn btn--link">View all products →</a>
+    </header>
+
+    <ul class="bestsellers__grid">
+      {bestSellers.map((p, i) => (
+        <li class="reveal" style={`transition-delay: ${i * 70}ms`}>
+          <ProductCard product={p} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .bestsellers__head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+  .bestsellers__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  .bestsellers__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-8) var(--space-6);
+  }
+  @media (max-width: 1024px) {
+    .bestsellers__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .bestsellers__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

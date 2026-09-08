@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600">
+  <defs>
+    <linearGradient id="bottleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffe44d;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e6c200;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="capGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="labelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#66BB6A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#43A047;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Bottle body -->
+  <path d="M140,120 Q140,100 160,90 L170,50 Q175,40 185,40 L215,40 Q225,40 230,50 L240,90 Q260,100 260,120 L270,500 Q270,540 240,550 L160,550 Q130,540 130,500 Z" fill="url(#bottleGrad)" stroke="#d4a800" stroke-width="1"/>
+  <!-- Cap -->
+  <rect x="170" y="20" width="60" height="30" rx="5" fill="url(#capGrad)"/>
+  <rect x="175" y="10" width="50" height="15" rx="4" fill="#2E7D32"/>
+  <!-- Neck ring -->
+  <ellipse cx="200" cy="85" rx="35" ry="6" fill="#c8b800" opacity="0.6"/>
+  <!-- Label background -->
+  <rect x="145" y="180" width="110" height="280" rx="12" fill="url(#labelGrad)"/>
+  <!-- Palestine text -->
+  <text x="200" y="210" text-anchor="middle" fill="#fff" font-size="8" font-family="Arial" font-weight="bold">IN LOVE WITH</text>
+  <text x="200" y="225" text-anchor="middle" fill="#fff" font-size="11" font-family="Arial" font-weight="bold">PALESTINE</text>
+  <!-- Donate line -->
+  <text x="200" y="250" text-anchor="middle" fill="#fff" font-size="9" font-family="Arial">'Donate Rs 20</text>
+  <text x="200" y="265" text-anchor="middle" fill="#fff" font-size="8" font-family="Arial">#saveGAZAmovement</text>
+  <!-- Main title -->
+  <text x="200" y="310" text-anchor="middle" fill="#fff" font-size="22" font-family="Arial Black, Arial" font-weight="900" letter-spacing="1">LEMOO</text>
+  <text x="200" y="340" text-anchor="middle" fill="#fff" font-size="22" font-family="Arial Black, Arial" font-weight="900" letter-spacing="1">WASHER</text>
+  <!-- Tagline -->
+  <text x="200" y="365" text-anchor="middle" fill="#fff" font-size="9" font-family="Arial" font-weight="bold">MAKE EVERY DISH SHINE</text>
+  <!-- Feature icons -->
+  <text x="165" y="400" text-anchor="middle" fill="#fff" font-size="6" font-family="Arial">GREASE LIFTER</text>
+  <text x="200" y="400" text-anchor="middle" fill="#fff" font-size="6" font-family="Arial">SKIN FRIENDLY</text>
+  <text x="235" y="400" text-anchor="middle" fill="#fff" font-size="6" font-family="Arial">PERFECT SHINE</text>
+  <!-- Lemon decorations -->
+  <circle cx="170" cy="470" r="18" fill="#FFD700" opacity="0.7"/>
+  <circle cx="200" cy="480" r="22" fill="#FFC107" opacity="0.8"/>
+  <circle cx="230" cy="470" r="16" fill="#FFD700" opacity="0.6"/>
+  <!-- Volume -->
+  <text x="200" y="520" text-anchor="middle" fill="#fff" font-size="8" font-family="Arial" font-weight="bold">NET VOLUME</text>
+  <text x="200" y="535" text-anchor="middle" fill="#fff" font-size="12" font-family="Arial" font-weight="bold">500ml</text>
+</svg>

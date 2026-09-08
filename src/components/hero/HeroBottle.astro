@@ -1,0 +1,75 @@
+---
+// HeroBottle — Pure CSS 3D float animation (no client hydration needed)
+---
+
+<div class="hero-bottle-wrapper">
+  <img
+    src="/images/lemoo-washer.png"
+    alt="LEMOO Washer dish wash bottle — Make Every Dish Shine"
+    width="800"
+    height="800"
+    loading="eager"
+    fetchpriority="high"
+    class="hero-bottle"
+    decoding="async"
+  />
+</div>
+
+<style>
+  .hero-bottle-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .hero-bottle {
+    width: 100%;
+    max-width: 480px;
+    border-radius: var(--radius-xl);
+    animation:
+      heroFloatRotate 8s ease-in-out infinite,
+      heroSpin 20s linear infinite;
+    filter:
+      drop-shadow(0 30px 60px rgba(0, 0, 0, 0.4))
+      drop-shadow(0 0 80px rgba(204, 255, 0, 0.15));
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    will-change: transform, filter;
+  }
+
+  @keyframes heroFloatRotate {
+    0%   { transform: translateY(0px)   rotateY(0deg)   rotateX(0deg)   scale(1); }
+    15%  { transform: translateY(-18px) rotateY(8deg)   rotateX(3deg)   scale(1.02); }
+    30%  { transform: translateY(-8px)  rotateY(-5deg)  rotateX(-2deg)  scale(0.99); }
+    50%  { transform: translateY(-25px) rotateY(12deg)  rotateX(4deg)   scale(1.03); }
+    70%  { transform: translateY(-12px) rotateY(-8deg)  rotateX(-3deg)  scale(1.01); }
+    85%  { transform: translateY(-20px) rotateY(5deg)   rotateX(2deg)   scale(1.02); }
+    100% { transform: translateY(0px)   rotateY(0deg)   rotateX(0deg)   scale(1); }
+  }
+
+  @keyframes heroSpin {
+    0%   { filter: drop-shadow(0 30px 60px rgba(0,0,0,0.4)) drop-shadow(0 0 80px rgba(204,255,0,0.15)); }
+    25%  { filter: drop-shadow(0 40px 70px rgba(0,0,0,0.5)) drop-shadow(0 0 100px rgba(204,255,0,0.25)); }
+    50%  { filter: drop-shadow(0 35px 65px rgba(0,0,0,0.45)) drop-shadow(0 0 90px rgba(204,255,0,0.2)); }
+    75%  { filter: drop-shadow(0 45px 75px rgba(0,0,0,0.5)) drop-shadow(0 0 110px rgba(204,255,0,0.28)); }
+    100% { filter: drop-shadow(0 30px 60px rgba(0,0,0,0.4)) drop-shadow(0 0 80px rgba(204,255,0,0.15)); }
+  }
+
+  @media (max-width: 1024px) {
+    .hero-bottle { max-width: 400px; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-bottle { max-width: 320px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bottle {
+      animation: none !important;
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,0.4));
+    }
+  }
+</style>

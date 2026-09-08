@@ -1,0 +1,73 @@
+---
+/**
+ * 404 — Not Found
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { SITE } from '@data/site';
+---
+
+<BaseLayout
+  title="Not found"
+  description="The page you were looking for has moved or no longer exists."
+  noindex
+>
+  <section class="notfound">
+    <div class="container">
+      <div class="notfound__inner reveal">
+        <p class="eyebrow">404</p>
+        <h1 class="notfound__title">This page has slipped through the sieve.</h1>
+        <p class="notfound__lede">
+          The link you followed may be broken, or the page may have been moved.
+          Try one of these instead.
+        </p>
+        <div class="notfound__actions">
+          <a href="/" class="btn btn--lg">Back to home</a>
+          <a href="/shop" class="btn btn--lg btn--ghost">Shop the catalog</a>
+        </div>
+        <p class="notfound__contact">
+          Still stuck? <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener">Chat with us on WhatsApp</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding-block: var(--space-32);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+  .notfound__inner {
+    max-width: 64ch;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .notfound__title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: var(--tracking-tighter);
+    margin-bottom: var(--space-5);
+  }
+  .notfound__lede {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+  }
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+    margin-top: var(--space-8);
+  }
+  .notfound__contact {
+    margin-top: var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+  .notfound__contact a {
+    color: var(--color-primary);
+    border-bottom: 1px solid currentColor;
+  }
+</style>

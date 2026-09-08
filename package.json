@@ -1,0 +1,32 @@
+{
+  "name": "pendooroots",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "eslint . --no-error-on-unmatched-pattern",
+    "format": "prettier --write src/**/*.{ts,tsx,astro,css,json}",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource-variable/playfair-display": "^5.3.0",
+    "astro": "^4.16.0",
+    "gsap": "^3.12.5",
+    "ogl": "^1.0.11",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "eslint": "^9.10.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "sharp": "^0.33.5",
+    "typescript": "^5.6.0"
+  }
+}
