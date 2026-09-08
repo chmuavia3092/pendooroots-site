@@ -604,6 +604,14 @@
   padding-bottom: 60px;
 }
 
+.footer-brand .nav-logo {
+  margin-bottom: 0;
+}
+
+.footer-brand .logo-text {
+  color: var(--color-text);
+}
+
 .footer-brand-desc {
   color: var(--color-text-secondary);
   font-size: 0.9rem;
@@ -1262,6 +1270,38 @@
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
   .cart-sidebar { width: 100%; right: -100%; }
+}
+
+/* ── HERO SECONDARY BUTTON ── */
+.hero-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+}
+
+.hero-btn-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgba(204,255,0,0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(204,255,0,0.15);
+}
+
+.hero-btn-secondary:active {
+  transform: translateY(0) scale(0.98);
 }
 
 @media (max-width: 480px) {
