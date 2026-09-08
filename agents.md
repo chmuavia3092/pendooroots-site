@@ -283,6 +283,21 @@ npm run lint && npm run format && npm run typecheck && npm run build
 
 ---
 
+## Deployment Workflow
+
+**After every change**, commit and push to trigger Vercel auto-deploy:
+
+```bash
+git add -A && git commit -m "feat: <description>" && git push origin master
+```
+
+- Remote: `origin` → `https://github.com/chmuavia3092/pendooroots-site.git`
+- Branch: `master`
+- Vercel auto-deploys on push to `master`
+- Never commit `node_modules/`, `dist/`, `.astro/`, or browser profile data
+
+---
+
 ## DO NOT
 
 - ❌ Add dependencies without checking bundle impact
