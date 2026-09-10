@@ -306,9 +306,18 @@ export function initGrainient(container: HTMLElement): () => void {
 
 // Auto-init on elements with [data-grainient]
 if (typeof window !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', () => {
+  const initAll = () => {
     document.querySelectorAll<HTMLElement>('[data-grainient]').forEach(el => {
-      initGrainient(el);
+      if (!(el as any).__grainientInit) {
+        (el as any).__grainientInit = true;
+        initGrainient(el);
+      }
     });
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
 }
