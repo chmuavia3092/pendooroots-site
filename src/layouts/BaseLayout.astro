@@ -191,15 +191,33 @@ const fullOgImage = new URL(ogImage, siteUrl).href;
     </div>
   </div>
 
-  <!-- SEARCH OVERLAY -->
-  <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search products">
-    <div class="search-overlay-inner">
-      <label class="sr-only" for="searchInput">Search products, ingredients, benefits</label>
-      <input type="text" id="searchInput" name="search" placeholder="Search products, ingredients, benefits…" autocomplete="off" spellcheck="false" enterkeyhint="search">
-      <button class="search-close" id="searchClose" aria-label="Close search"><i class="fas fa-times" aria-hidden="true"></i></button>
+  <!-- SEARCH DRAWER -->
+  <div class="search-drawer-overlay" id="searchDrawerOverlay" aria-hidden="true"></div>
+  <aside class="search-drawer" id="searchDrawer" role="dialog" aria-modal="true" aria-label="Search products">
+    <div class="search-drawer-header">
+      <h3>Search</h3>
+      <button class="search-drawer-close" id="searchDrawerClose" aria-label="Close search"><i class="fas fa-times" aria-hidden="true"></i></button>
     </div>
-    <div class="search-results" id="searchResults"></div>
-  </div>
+    <div class="search-drawer-body">
+      <div class="search-drawer-input-wrap">
+        <label class="sr-only" for="searchInput">Search products, ingredients, benefits</label>
+        <i class="fas fa-search search-drawer-icon" aria-hidden="true"></i>
+        <input type="text" id="searchInput" name="search" placeholder="Search products, ingredients, benefits…" autocomplete="off" spellcheck="false" enterkeyhint="search" autocapitalize="words" />
+        <button type="button" class="search-clear" id="searchClear" aria-label="Clear search" hidden>
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="search-popular">
+        <div class="search-popular-title">Popular Searches</div>
+        <div class="search-popular-list" id="searchPopularList"></div>
+      </div>
+      <div id="searchResults" class="search-results" role="listbox" aria-label="Product results"></div>
+      <div id="searchNoResults" class="search-no-results" hidden>
+        <p>No products found.</p>
+        <p class="search-no-results-hint">Try another ingredient, category, or benefit.</p>
+      </div>
+    </div>
+  </aside>
 
   <!-- MAIN CONTENT -->
   <main id="main-content"><slot /></main>

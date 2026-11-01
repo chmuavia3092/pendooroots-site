@@ -28,6 +28,10 @@ import {
   onStoreChange,
 } from '@/store';
 
+// Search engine (pure, local catalogue filtering)
+import { searchProducts, getPopularSearches } from '@/utils/search';
+import type { Product } from '@/data/products';
+
 // Dynamic imports for optional components (non-blocking)
 import('@/components/hero/HeroBottle').catch(() => {});
 import('@/components/hero/HeroGrainient').catch(() => {});
@@ -153,28 +157,199 @@ function initThemeToggle(): void {
   });
 }
 
-// Search overlay
-function initSearch(): void {
-  const searchToggle = document.getElementById('searchToggle');
-  const searchClose = document.getElementById('searchClose');
-  const searchOverlay = document.getElementById('searchOverlay');
-  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+// Search drawer — premium live product discovery (right-side drawer)
+function initSearchDrawer(): void {
+  const toggle = document.getElementById('searchToggle');
+  const drawer = document.getElementById('searchDrawer')!;
+  const overlay = document.getElementById('searchDrawerOverlay');
+  const close = document.getElementById('searchDrawerClose');
+  const input = document.getElementById('searchInput')! as HTMLInputElement;
+  const clear = document.getElementById('searchClear');
+  const popularSection = document.getElementById('searchPopular');
+  const popularList = document.getElementById('searchPopularList');
+  const resultsWrap = document.getElementById('searchResults');
+  const noResults = document.getElementById('searchNoResults');
 
-  searchToggle?.addEventListener('click', () => {
-    searchOverlay?.classList.add('active');
-    searchInput?.focus();
-  });
+  if (!input) return;
 
-  searchClose?.addEventListener('click', () => {
-    searchOverlay?.classList.remove('active');
-  });
+  const body = document.body;
+  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  let results: Product[] = [];
+  let highlightedIndex = -1;
 
-  // Close on Escape
+  function escapeHtml(text: string): string {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function open(): void {
+    drawer.classList.add('active');
+    overlay?.classList.add('active');
+    body.classList.add('scroll-lock');
+    input.focus();
+    highlightedIndex = -1;
+    renderEmpty();
+  }
+
+  function closeDrawer(): void {
+    drawer.classList.remove('active');
+    overlay?.classList.remove('active');
+    body.classList.remove('scroll-lock');
+    input.value = '';
+    clear?.classList.remove('visible');
+    results = [];
+    highlightedIndex = -1;
+    renderEmpty();
+  }
+
+  function renderEmpty(): void {
+    if (popularSection) popularSection.hidden = false;
+    if (resultsWrap) {
+      resultsWrap.hidden = true;
+      resultsWrap.innerHTML = '';
+    }
+    if (noResults) noResults.hidden = true;
+  }
+
+  function renderPopular(): void {
+    if (!popularList) return;
+    const terms = getPopularSearches(8);
+    popularList.innerHTML = terms
+      .map((t) => `<button type="button" class="search-popular-btn" data-term="${escapeHtml(t)}">${escapeHtml(t)}</button>`)
+      .join('');
+  }
+
+  function renderResults(list: Product[]): void {
+    if (popularSection) popularSection.hidden = true;
+    if (noResults) noResults.hidden = true;
+    if (resultsWrap) {
+      resultsWrap.hidden = false;
+      resultsWrap.innerHTML = '';
+      if (list.length === 0) {
+        if (noResults) noResults.hidden = false;
+        return;
+      }
+      list.forEach((p, i) => {
+        const a = document.createElement('a');
+        a.href = `/shop/${p.slug}`;
+        a.className = 'search-result-item';
+        a.setAttribute('role', 'option');
+        a.setAttribute('aria-label', `${p.name} ${p.variant}, ${money(p.price)}`);
+        a.setAttribute('data-index', String(i));
+        a.innerHTML = `
+          <div class="search-result-img"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" width="64" height="64" loading="lazy" decoding="async" /></div>
+          <div class="search-result-info">
+            <h4 class="search-result-name">${escapeHtml(p.name)}</h4>
+            <div class="search-result-meta">${escapeHtml(p.category)} · ${escapeHtml(p.variant)}</div>
+            <div class="search-result-price">${money(p.price)}</div>
+          </div>
+        `;
+        resultsWrap.appendChild(a);
+      });
+    }
+    highlightedIndex = -1;
+  }
+
+  function highlight(idx: number): void {
+    const items = resultsWrap?.querySelectorAll<HTMLElement>('.search-result-item') ?? [];
+    if (items.length === 0) return;
+    const prev = items[highlightedIndex];
+    if (highlightedIndex >= 0 && prev) prev.classList.remove('highlighted');
+    highlightedIndex = Math.max(-1, Math.min(idx, items.length - 1));
+    const active = items[highlightedIndex];
+    if (highlightedIndex >= 0 && active) {
+      active.classList.add('highlighted');
+      active.scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  function openSelected(): void {
+    const item = resultsWrap?.querySelector<HTMLElement>(`.search-result-item[data-index="${highlightedIndex}"]`);
+    if (item) window.location.href = item.getAttribute('href') || '/shop';
+  }
+
+  // Open / close wiring
+  toggle?.addEventListener('click', open);
+  close?.addEventListener('click', closeDrawer);
+  overlay?.addEventListener('click', closeDrawer);
+
+  // Escape closes drawer
   document.addEventListener('keydown', (e) => {
+    if (!drawer.classList.contains('active')) return;
     if (e.key === 'Escape') {
-      searchOverlay?.classList.remove('active');
+      e.preventDefault();
+      closeDrawer();
+      return;
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      highlight(highlightedIndex + 1);
+      return;
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      highlight(highlightedIndex - 1);
+      return;
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      openSelected();
     }
   });
+
+  // Live search input
+  input.addEventListener('input', () => {
+    const val = input.value.trim();
+    if (debounceTimer) clearTimeout(debounceTimer);
+    if (val === '') {
+      clear?.classList.remove('visible');
+      results = [];
+      renderEmpty();
+      return;
+    }
+    clear?.classList.add('visible');
+    debounceTimer = setTimeout(() => {
+      results = searchProducts(val);
+      renderResults(results);
+      highlight(-1);
+    }, 200);
+  });
+
+  // Clear input
+  clear?.addEventListener('click', () => {
+    input.value = '';
+    input.focus();
+    clear.classList.remove('visible');
+    results = [];
+    renderEmpty();
+  });
+
+  // Result click — open product page
+  resultsWrap?.addEventListener('click', (e) => {
+    const item = (e.target as HTMLElement).closest<HTMLElement>('.search-result-item');
+    if (!item) return;
+    e.preventDefault();
+    const href = item.getAttribute('href');
+    if (href) window.location.href = href;
+  });
+
+  // Popular search click — populate input + show results
+  popularList?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLElement>('.search-popular-btn');
+    if (!btn) return;
+    e.preventDefault();
+    const term = btn.getAttribute('data-term') || btn.textContent?.trim() || '';
+    if (!term) return;
+    input.value = term;
+    clear?.classList.add('visible');
+    results = searchProducts(term);
+    renderResults(results);
+    highlight(-1);
+    input.focus();
+  });
+
+  renderPopular();
 }
 
 // ── Commerce: cart + wishlist ────────────────────────────────────────
@@ -761,7 +936,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
   initMobileMenu();
   initThemeToggle();
-  initSearch();
+  initSearchDrawer();
   initCart();
   initShop();
   initNavigation();
