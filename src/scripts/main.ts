@@ -222,32 +222,37 @@ function initSearchDrawer(): void {
 
   function renderResults(list: Product[]): void {
     if (popularSection) popularSection.hidden = true;
-    if (noResults) noResults.hidden = true;
+
     if (resultsWrap) {
       resultsWrap.hidden = false;
       resultsWrap.innerHTML = '';
-      if (list.length === 0) {
-        if (noResults) noResults.hidden = false;
-        return;
+
+      if (list.length > 0) {
+        list.forEach((p, i) => {
+          const a = document.createElement('a');
+          a.href = `/shop/${p.slug}`;
+          a.className = 'search-result-item';
+          a.setAttribute('role', 'option');
+          a.setAttribute('aria-label', `${p.name} ${p.variant}, ${money(p.price)}`);
+          a.setAttribute('data-index', String(i));
+          a.innerHTML = `
+            <div class="search-result-img"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" width="64" height="64" loading="lazy" decoding="async" /></div>
+            <div class="search-result-info">
+              <h4 class="search-result-name">${escapeHtml(p.name)}</h4>
+              <div class="search-result-meta">${escapeHtml(p.category)} · ${escapeHtml(p.variant)}</div>
+              <div class="search-result-price">${money(p.price)}</div>
+            </div>
+          `;
+          resultsWrap.appendChild(a);
+        });
       }
-      list.forEach((p, i) => {
-        const a = document.createElement('a');
-        a.href = `/shop/${p.slug}`;
-        a.className = 'search-result-item';
-        a.setAttribute('role', 'option');
-        a.setAttribute('aria-label', `${p.name} ${p.variant}, ${money(p.price)}`);
-        a.setAttribute('data-index', String(i));
-        a.innerHTML = `
-          <div class="search-result-img"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" width="64" height="64" loading="lazy" decoding="async" /></div>
-          <div class="search-result-info">
-            <h4 class="search-result-name">${escapeHtml(p.name)}</h4>
-            <div class="search-result-meta">${escapeHtml(p.category)} · ${escapeHtml(p.variant)}</div>
-            <div class="search-result-price">${money(p.price)}</div>
-          </div>
-        `;
-        resultsWrap.appendChild(a);
-      });
     }
+
+    // Single source of truth: hide "no results" when products exist, show when empty
+    if (noResults) {
+      noResults.hidden = list.length > 0;
+    }
+
     highlightedIndex = -1;
   }
 
