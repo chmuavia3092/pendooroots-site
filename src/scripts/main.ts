@@ -203,15 +203,6 @@ function initSearchDrawer(): void {
     renderEmpty();
   }
 
-  function renderEmpty(): void {
-    if (popularSection) popularSection.hidden = false;
-    if (resultsWrap) {
-      resultsWrap.hidden = true;
-      resultsWrap.innerHTML = '';
-    }
-    if (noResults) noResults.hidden = true;
-  }
-
   function renderPopular(): void {
     if (!popularList) return;
     const terms = getPopularSearches(8);
@@ -229,9 +220,11 @@ function initSearchDrawer(): void {
 
     // Product results: show ONLY when matching products exist
     if (resultsWrap) {
-      resultsWrap.hidden = !hasMatches;
+      const showResults = hasMatches;
+      resultsWrap.hidden = !showResults;
+      resultsWrap.style.display = showResults ? '' : 'none';
       resultsWrap.innerHTML = '';
-      if (hasMatches) {
+      if (showResults) {
         list.forEach((p, i) => {
           const a = document.createElement('a');
           a.href = `/shop/${p.slug}`;
@@ -254,10 +247,25 @@ function initSearchDrawer(): void {
 
     // No-results message: show ONLY when non-empty query AND zero matches
     if (noResults) {
-      noResults.hidden = !hasQuery || hasMatches;
+      const showNoResults = hasQuery && !hasMatches;
+      noResults.hidden = !showNoResults;
+      noResults.style.display = showNoResults ? '' : 'none';
     }
 
     highlightedIndex = -1;
+  }
+
+  function renderEmpty(): void {
+    if (popularSection) popularSection.hidden = false;
+    if (resultsWrap) {
+      resultsWrap.hidden = true;
+      resultsWrap.style.display = 'none';
+      resultsWrap.innerHTML = '';
+    }
+    if (noResults) {
+      noResults.hidden = true;
+      noResults.style.display = 'none';
+    }
   }
 
   function highlight(idx: number): void {
