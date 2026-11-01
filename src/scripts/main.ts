@@ -221,13 +221,17 @@ function initSearchDrawer(): void {
   }
 
   function renderResults(list: Product[]): void {
-    if (popularSection) popularSection.hidden = true;
+    const hasQuery = input.value.trim().length > 0;
+    const hasMatches = list.length > 0;
 
+    // Popular searches visible only on empty input
+    if (popularSection) popularSection.hidden = hasQuery;
+
+    // Product results: show ONLY when matching products exist
     if (resultsWrap) {
-      resultsWrap.hidden = false;
+      resultsWrap.hidden = !hasMatches;
       resultsWrap.innerHTML = '';
-
-      if (list.length > 0) {
+      if (hasMatches) {
         list.forEach((p, i) => {
           const a = document.createElement('a');
           a.href = `/shop/${p.slug}`;
@@ -248,9 +252,9 @@ function initSearchDrawer(): void {
       }
     }
 
-    // Single source of truth: hide "no results" when products exist, show when empty
+    // No-results message: show ONLY when non-empty query AND zero matches
     if (noResults) {
-      noResults.hidden = list.length > 0;
+      noResults.hidden = !hasQuery || hasMatches;
     }
 
     highlightedIndex = -1;
